@@ -4,6 +4,7 @@
 #include <string>
 #include <cstdlib>
 #include <ctime>
+#include <cctype>
 using namespace std;
 
 
@@ -20,6 +21,23 @@ vector <string> loadWords (const string &filename){
     return temp_words; //mengembalikan temp_words yang berisi kata dari dictionary
 }
 
+bool isStringOnlyAlphabet(string &str) {
+    for(int i = 0; i < str.length(); i++) {
+        if(!isalpha(str[i])) 
+            return false;
+    }
+
+    return true;
+}
+
+// Validasi Input
+bool isUserInputValid(string &input) {
+    return ( 
+        input.length() == 5 &&
+        isStringOnlyAlphabet(input)
+    );
+}
+
 int main () {
 
     srand(time(0)); //untuk seed function rand
@@ -33,10 +51,10 @@ int main () {
         int correctChar = 0; //jumlah character yang berhasil ditebak pada setiap kesempatan
 
         while (guess--) {
-        cout << "Silahkan masukkan tebakan anda: ";
-        string guessWord;
-        cin >> guessWord;
-        correctChar = 0;
+            cout << "Silahkan masukkan tebakan anda: ";
+            string guessWord;
+            cin >> guessWord;
+            correctChar = 0;
 
             //Section ini untuk menghitung jumlah masing-masing character pada kata yang harus ditebak
             //Contoh: JOGJA -> J(2), O(1), G(1), A(1)
