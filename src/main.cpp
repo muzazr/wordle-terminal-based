@@ -38,6 +38,14 @@ bool isUserInputValid(string &input) {
     );
 }
 
+// to upper a string
+string toUpperString(string &word) {
+    for(int i = 0; i < word.length(); i++) {
+        word[i] = toupper(word[i]);
+    }
+    return word;
+}
+
 int main () {
 
     srand(time(0)); //untuk seed function rand
@@ -47,6 +55,7 @@ int main () {
 
     while (play) {
         string targetWord = secretWords[rand() % secretWords.size()]; //randomize kata yang harus ditebak
+        targetWord = toUpperString(targetWord);
         int guess = 6; //kesempatan player untuk menebak
         int correctChar = 0; //jumlah character yang berhasil ditebak pada setiap kesempatan
 
@@ -55,9 +64,9 @@ int main () {
             do {
                 cout << "Silahkan masukkan tebakan anda: ";
                 cin >> guessWord;
-                if(!isUserInputValid(guessWord)) {
-
-                } else 
+                if(!isUserInputValid(guessWord)) 
+                    cout << "Pastikan kata berjumlah lima dan input hanya mengandung alfabet" << endl;
+                else 
                     break;
             } while(true);
             
