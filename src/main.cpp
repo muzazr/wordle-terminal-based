@@ -51,9 +51,16 @@ int main () {
         int correctChar = 0; //jumlah character yang berhasil ditebak pada setiap kesempatan
 
         while (guess--) {
-            cout << "Silahkan masukkan tebakan anda: ";
             string guessWord;
-            cin >> guessWord;
+            do {
+                cout << "Silahkan masukkan tebakan anda: ";
+                cin >> guessWord;
+                if(!isUserInputValid(guessWord)) {
+
+                } else 
+                    break;
+            } while(true);
+            
             correctChar = 0;
 
             //Section ini untuk menghitung jumlah masing-masing character pada kata yang harus ditebak
