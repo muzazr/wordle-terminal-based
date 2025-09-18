@@ -69,6 +69,7 @@ int main () {
                 else 
                     break;
             } while(true);
+            guessWord = toUpperString(guessWord);
             
             correctChar = 0;
 
