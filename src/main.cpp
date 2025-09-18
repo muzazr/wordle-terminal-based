@@ -1,8 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "game.hpp"
-#include "utils.hpp"
+#include "../include/game.hpp"
+#include "../include/utils.hpp"
 
 using namespace std;
 
