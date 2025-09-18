@@ -1,5 +1,5 @@
-#include "game.hpp"
-#include "utils.hpp"
+#include "../include/game.hpp"
+#include "../include/utils.hpp"
 #include <iostream>
 #include <cstdlib>
 using namespace std;
@@ -10,21 +10,29 @@ void playGame(const vector<string> &secretWords) {
     int correctChar = 0;
 
     while (guess--) {
-        cout << "Silahkan masukkan tebakan anda: ";
         string guessWord;
-        cin >> guessWord;
+         do {
+                cout << "Silahkan masukkan tebakan anda: ";
+                cin >> guessWord;
+                bool isInputValid = isUserInputValid(guessWord);
+                if(!isInputValid) 
+                    cout << "Pastikan kata berjumlah lima dan input hanya mengandung alfabet" << endl;
+                else 
+                    break;
+            } while(true);
+        guessWord = toUpperString(guessWord);
         correctChar = 0;
 
         // hitung jumlah masing-masing huruf
         int charInTargetWord[26] = {};
         for (int i = 0; i < targetWord.length(); i++) {
-            int indexCharacter = targetWord[i] - 'A';
+            int indexCharacter = targetWord[i] - 'A' + 1;
             charInTargetWord[indexCharacter]++;
         }
 
         // cek hasil tebakan
         for (int i = 0; i < guessWord.length(); i++) {
-            int indexCharacter = guessWord[i] - 'A';
+            int indexCharacter = guessWord[i] - 'A' + 1;
             if (guessWord[i] == targetWord[i]) {
                 printGreen(guessWord[i]);
                 correctChar++;

@@ -1,14 +1,41 @@
-#include "utils.hpp"
 #include <fstream>
+#include <vector>
 #include <iostream>
 using namespace std;
+
+
+
+bool isStringOnlyAlphabet(string &str) {
+    for(int i = 0; i < str.length(); i++) {
+        if(!isalpha(str[i])) 
+            return false;
+    }
+
+    return true;
+}
+
+// Validasi Input
+bool isUserInputValid(string &input) {
+    return ( 
+        input.length() == 5 &&
+        isStringOnlyAlphabet(input)
+    );
+}
+
+// to upper a string
+string toUpperString(string &word) {
+    for(int i = 0; i < word.length(); i++) {
+        word[i] = toupper(word[i]);
+    }
+    return word;
+}
 
 vector<string> loadWords(const string &filename) {
     vector<string> words;
     ifstream file(filename);
     string word;
     while (file >> word) {
-        words.push_back(word);
+        words.push_back(toUpperString(word));
     }
     return words;
 }
