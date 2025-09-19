@@ -13,8 +13,8 @@ bool isUserInputValid(std::string &input);
 std::string toUpperString(std::string &word);
 
 // print warna ke terminal
-void printGreen(char c);
-void printYellow(char c);
-void printGray(char c);
+std::string printGreen(char c);
+std::string printYellow(char c);
+std::string printGray(char c);
 
 #endif

@@ -40,14 +40,20 @@ vector<string> loadWords(const string &filename) {
     return words;
 }
 
-void printGreen(char c) {
-    cout << "\033[32m" << c << "\033[0m";
+string printGreen(char c) {
+    string letter = {c, '\0'};
+    string result = "\033[32m" + letter + "\033[0m";
+    return result;
 }
 
-void printYellow(char c) {
-    cout << "\033[33m" << c << "\033[0m";
+string printYellow(char c) {
+    string letter = {c, '\0'};
+    string result = "\033[33m" + letter + "\033[0m";
+    return result;
 }
 
-void printGray(char c) {
-    cout << "\033[90m" << c << "\033[0m";
+string printGray(char c) {
+    string letter = {c, '\0'};
+    string result = "\033[90m" + letter + "\033[0m";
+    return result;
 }

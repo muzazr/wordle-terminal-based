@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <ctime>
 #include "../include/game.hpp"
 #include "../include/utils.hpp"
 
