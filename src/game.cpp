@@ -8,7 +8,11 @@ using namespace std;
 const int ROW = 6;
 const int COLUMN = 5;
 
-void board(string answerOfPlayer[6][5]) {
+void clearTerminal() {
+    system("cls");
+}
+
+void drawBoard(string answerOfPlayer[6][5]) {
     int width_of_one_column = 5;
     int width_of_row = COLUMN*width_of_one_column + COLUMN + 1;
     // cout << '+' << setfill('-') << setw(width_of_row - 1) << '+' << endl;
@@ -42,11 +46,20 @@ void board(string answerOfPlayer[6][5]) {
 }
 
 void playGame(const vector<string> &secretWords) {
+    string answerOfPlayer[ROW][COLUMN];
+    for(int i = 0; i < ROW; i++) {
+        for(int j = 0; j < COLUMN; j++) {
+            answerOfPlayer[i][j] = " ";
+        }
+    }
+
     string targetWord = secretWords[rand() % secretWords.size()];
     int guess = 6;
     int correctChar = 0;
 
     while (guess--) {
+        clearTerminal();
+        drawBoard(answerOfPlayer);
         string guessWord;
          do {
                 cout << "Silahkan masukkan tebakan anda: ";
@@ -71,23 +84,27 @@ void playGame(const vector<string> &secretWords) {
         for (int i = 0; i < guessWord.length(); i++) {
             int indexCharacter = guessWord[i] - 'A' + 1;
             if (guessWord[i] == targetWord[i]) {
-                printGreen(guessWord[i]);
+                answerOfPlayer[(ROW - 1) - guess][i] = printGreen(guessWord[i]);
                 correctChar++;
                 charInTargetWord[indexCharacter]--;
             } else if (charInTargetWord[indexCharacter] > 0) {
-                printYellow(guessWord[i]);
+                answerOfPlayer[(ROW - 1) - guess][i] = printYellow(guessWord[i]);
                 charInTargetWord[indexCharacter]--;
             } else {
-                printGray(guessWord[i]);
+                answerOfPlayer[(ROW - 1) - guess][i] = printGray(guessWord[i]);
             }
         }
 
         cout << endl;
 
         if (correctChar == 5) {
+            clearTerminal();
+            drawBoard(answerOfPlayer);
             cout << "Selamat tebakan anda benar!" << endl;
             return;
         } else if (guess > 0) {
+            clearTerminal();
+            drawBoard(answerOfPlayer);
             cout << "Masih salah, coba lagi!" << endl;
         }
         cout << endl;
