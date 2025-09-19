@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-void board(std::string answerOfPlayer[6][5]);
+void drawBoard(std::string answerOfPlayer[6][5]);
 
 void playGame(const std::vector<std::string> &secretWords);
 

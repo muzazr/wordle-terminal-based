@@ -5,14 +5,15 @@
 #include <vector>
 using namespace std;
 
-// load kata dari file
+// load word from dictionary
 std::vector<std::string> loadWords(const std::string &filename);
 
+//checking user input
 bool isStringOnlyAlphabet(std::string &str);
 bool isUserInputValid(std::string &input);
 std::string toUpperString(std::string &word);
 
-// print warna ke terminal
+// print color to terminal
 std::string printGreen(char c);
 std::string printYellow(char c);
 std::string printGray(char c);

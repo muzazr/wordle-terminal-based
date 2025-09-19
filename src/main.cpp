@@ -10,12 +10,12 @@ using namespace std;
 int main() {
     srand(time(0));
 
-    vector<string> secretWords = loadWords("words.txt");
-    bool play = true;
+    vector<string> secretWords = loadWords("../src/words.txt");
+    bool play = true; //to give players the option to play again, true for play again
 
     while (play) {
-        playGame(secretWords);  // dipindahkan ke game.cpp
-        cout << "Mau bermain lagi? (y/n) : ";
+        playGame(secretWords);
+        cout << "Want to play again? (y/n) : ";
         char playAgain;
         cin >> playAgain;
         play = (playAgain == 'y');
