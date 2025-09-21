@@ -47,6 +47,9 @@ string printGreen(char c) {
     string result = "\033[32m" + letter + "\033[0m";
     return result;
 }
+string printGreen(string str) {
+    return "\033[32m" + str + "\033[0m";
+}
 
 //change color output
 string printYellow(char c) {
@@ -54,10 +57,16 @@ string printYellow(char c) {
     string result = "\033[33m" + letter + "\033[0m";
     return result;
 }
+string printYellow(string str) {
+    return "\033[33m" + str + "\033[0m";
+}
 
 //change color output
 string printGray(char c) {
     string letter = {c, '\0'};
     string result = "\033[90m" + letter + "\033[0m";
     return result;
+}
+string printGray(string str) {
+    return "\033[90m" + str + "\033[0m";
 }

@@ -13,13 +13,22 @@ void clearTerminal() {
     system("cls");
 }
 
+void drawGameHeader() {
+    cout << setfill('=') << setw(31) << '=' << endl;
+    cout << "   << WORDLE (C++ Edition) >>   " << endl; 
+    cout << setfill('=') << setw(31) << '=' << endl;
+    cout << "   Guess the 5-letter word!   " << endl << endl;
+    cout << printGreen("Green") << " : correct " << endl;
+    cout << printYellow("Yellow") << ": correct, but in the " << endl << "        wrong position" << endl;
+    cout << printGray("Gray") << "  : incorrect" << endl << endl;
+
+}
 
 //visualization of wordle board
 void drawBoard(string answerOfPlayer[6][5]) {
 
     int width_of_one_column = 5; //size of column every char
     int width_of_row = COLUMN*width_of_one_column + COLUMN + 1; //give a column boundaries
-    // cout << '+' << setfill('-') << setw(width_of_row - 1) << '+' << endl;
 
     // Render the Wordle board by iterating through rows and columns.
     // Even indices (i % 2 == 0) draw horizontal separators,
@@ -56,6 +65,14 @@ void drawBoard(string answerOfPlayer[6][5]) {
     }
 }
 
+// Redraw a terminal: clear screen, draw game header, and draw wordle board
+void drawTerminal(
+    string answerOfPlayer[6][5]
+) {
+    clearTerminal();
+    drawGameHeader();
+    drawBoard(answerOfPlayer);
+}
 
 //logic wordle
 void playGame(const vector<string> &secretWords) {
@@ -71,8 +88,7 @@ void playGame(const vector<string> &secretWords) {
     int correctChar = 0; //variable that count right char and right position for every guess
 
     while (guess--) {
-        clearTerminal();
-        drawBoard(answerOfPlayer);
+        drawTerminal(answerOfPlayer);
         string guessWord;
          do { //ensuring guesses comply with the rules
                 cout << "Please give your answer\t: ";
@@ -128,14 +144,12 @@ void playGame(const vector<string> &secretWords) {
 
         if (correctChar == 5) { 
             //there is 5 char correct char and position, 
-            //it means guess player same with target word
-            clearTerminal();
-            drawBoard(answerOfPlayer);
+            //it means guess play   er same with target word
+            drawTerminal(answerOfPlayer);
             cout << "Congratulations, your guess is correct!" << endl;
             return;
         } else if (guess > 0) {
-            clearTerminal();
-            drawBoard(answerOfPlayer);
+            drawTerminal(answerOfPlayer);
             cout << "Still incorrect, try again!" << endl;
         }
         cout << endl;
