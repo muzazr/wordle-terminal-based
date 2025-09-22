@@ -5,8 +5,9 @@
 #include <iomanip>
 using namespace std;
 
-const int ROW = 6;
-const int COLUMN = 5;
+const int ROW = 6; //board size
+const int COLUMN = 5; //board size
+int scorePlayer = 0; //add if the player guessess correctly
 
 //reset terminal after player give input
 void clearTerminal() {
@@ -77,6 +78,7 @@ void drawTerminal(
 //logic wordle
 void playGame(const vector<string> &secretWords) {
     string answerOfPlayer[ROW][COLUMN];
+    
     for(int i = 0; i < ROW; i++) { //setup wordle board
         for(int j = 0; j < COLUMN; j++) {
             answerOfPlayer[i][j] = " ";
@@ -140,13 +142,13 @@ void playGame(const vector<string> &secretWords) {
             }
         }
 
-        cout << endl;
-
         if (correctChar == 5) { 
             //there is 5 char correct char and position, 
             //it means guess play   er same with target word
             drawTerminal(answerOfPlayer);
-            cout << "Congratulations, your guess is correct!" << endl;
+            scorePlayer++;
+            cout << "\nCongratulations, your guess is correct!" << endl;
+            cout << "You have successfully guessed " << scorePlayer << " times." << endl << endl;
             return;
         } else if (guess > 0) {
             drawTerminal(answerOfPlayer);
@@ -156,5 +158,6 @@ void playGame(const vector<string> &secretWords) {
     }
 
     cout << "Well, you failed to guess correctly :(" << endl;
-    cout << "The correct answer is " << targetWord << endl << endl << endl;
+    cout << "The correct answer is " << targetWord << endl;
+    cout << "You have successfully guessed " << scorePlayer << " times." << endl << endl;
 }
