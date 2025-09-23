@@ -4,10 +4,12 @@
 #include <vector>
 #include <string>
 
-void drawGameHeader();
+void drawGameHeaderEnglish();
+void drawGameHeaderBahasa();
 
 void drawBoard(std::string answerOfPlayer[6][5]);
 
-void playGame(const std::vector<std::string> &secretWords);
+void playGameEnglish(const std::vector<std::string> &secretWords);
+void playGameBahasa(const std::vector<std::string> &secretWords);
 
 #endif
