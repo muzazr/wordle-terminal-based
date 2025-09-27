@@ -1,8 +1,9 @@
 #include <fstream>
 #include <vector>
 #include <iostream>
+#include <algorithm>
+#include <cctype>
 using namespace std;
-
 
 
 bool isStringOnlyAlphabet(string &str) {
@@ -15,11 +16,19 @@ bool isStringOnlyAlphabet(string &str) {
 }
 
 //ensuring input comply with the rules
-bool isUserInputValid(string &input) {
-    return ( 
-        input.length() == 5 &&
-        isStringOnlyAlphabet(input)
-    );
+bool isUserInputValid(string &input, const vector<string> &wordList) {
+    if(input.length() != 5 || !isStringOnlyAlphabet(input) ) {
+        return false;
+    }
+
+    auto findWord = std::find(wordList.begin(), wordList.end(), input);
+    cout << wordList[0] << endl;
+    if(findWord == wordList.end()) {
+        cout << "Kata tidak valid" << endl;
+        return false;
+    }
+
+    return true;
 }
 
 //make a guess uppercase string

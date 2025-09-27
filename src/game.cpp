@@ -113,13 +113,14 @@ void playGameEnglish(const vector<string> &secretWords) {
          do { //ensuring guesses comply with the rules
                 cout << "Please give your answer\t: ";
                 cin >> guessWord;
-                bool isInputValid = isUserInputValid(guessWord);
+                guessWord = toUpperString(guessWord);
+                bool isInputValid = isUserInputValid(guessWord, secretWords);
                 if(!isInputValid) 
-                    cout << "Ensure that the word has five letters and that the input only contains letters." << endl;
+                    cout << "Ensure that the word has five letters, the input only contains letters, and the word is valid." << endl;
                 else 
                     break;
             } while(true);
-        guessWord = toUpperString(guessWord); //convert to uppercase if player give lowercase input
+        //convert to uppercase if player give lowercase input
         correctChar = 0;
         
         //count every character player guess
@@ -199,9 +200,10 @@ void playGameBahasa(const vector<string> &secretWords) {
          do { //ensuring guesses comply with the rules
                 cout << "Masukkan jawaban anda\t: ";
                 cin >> guessWord;
-                bool isInputValid = isUserInputValid(guessWord);
+                guessWord = toUpperString(guessWord);
+                bool isInputValid = isUserInputValid(guessWord, secretWords);
                 if(!isInputValid) 
-                    cout << "Pastikan jawaban anda hanya 5 karakter dan hanya berupa huruf." << endl;
+                    cout << "Pastikan jawaban anda hanya 5 karakter, hanya berupa huruf, dan kata valid." << endl;
                 else 
                     break;
             } while(true);
