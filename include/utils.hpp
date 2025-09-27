@@ -10,7 +10,7 @@ std::vector<std::string> loadWords(const std::string &filename);
 
 //checking user input
 bool isStringOnlyAlphabet(std::string &str);
-bool isUserInputValid(std::string &input);
+bool isUserInputValid(std::string &input, const std::vector<string> &wordList);
 std::string toUpperString(std::string &word);
 
 // print color to terminal
