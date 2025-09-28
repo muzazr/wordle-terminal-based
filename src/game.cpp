@@ -87,6 +87,11 @@ void playGame(const vector<string> &secretWords, LanguageSystem &languageSystem)
     }
 
     string targetWord = secretWords[rand() % secretWords.size()]; //give random word to guess
+    if(languageSystem.getLang() == "id") { // only execute this code when user choose bahasa as language
+        const int WORD_SIZE = 100; // 100 only refers that the word that will be choosen as target word is beetwen 0 - 99 index because the top 100 word of list have been selected to easier the user.
+        targetWord = secretWords[rand() % WORD_SIZE]; 
+    }
+
     int guess = 6;
     int correctChar = 0; //variable that count right char and right position for every guess
 
@@ -145,7 +150,7 @@ void playGame(const vector<string> &secretWords, LanguageSystem &languageSystem)
             drawTerminal(answerOfPlayer, languageSystem);
             scorePlayer++;
             cout << "\n" << languageSystem.stringResource("congratulation") << endl;
-            cout << languageSystem.stringResource("you_have_successfully_guessed") << scorePlayer << " " << languageSystem.stringResource("times") << endl << endl;
+            cout << languageSystem.stringResource("you_have_successfully_guessed") << " " << scorePlayer << " " << languageSystem.stringResource("times") << endl << endl;
             return;
         } else if (guess > 0) {
             drawTerminal(answerOfPlayer, languageSystem);
@@ -157,7 +162,7 @@ void playGame(const vector<string> &secretWords, LanguageSystem &languageSystem)
     wrongGuess++;
     cout << languageSystem.stringResource("you_failed_1") << endl;
     cout << languageSystem.stringResource("you_failed_2") << " " << targetWord << endl;
-    cout << languageSystem.stringResource("you_have_successfully_guessed") << scorePlayer << " " << languageSystem.stringResource("times") << endl;
+    cout << languageSystem.stringResource("you_have_successfully_guessed") << " " << scorePlayer << " " << languageSystem.stringResource("times") << endl;
     cout << languageSystem.stringResource("you_have_failed_guessed") << " " << wrongGuess << " " << languageSystem.stringResource("times") << endl << endl;
 }
 
