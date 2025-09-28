@@ -1,5 +1,6 @@
 #include "../include/game.hpp"
 #include "../include/utils.hpp"
+#include "../include/language.hpp"
 #include <iostream>
 #include <cstdlib>
 #include <iomanip>
@@ -93,8 +94,7 @@ void drawTerminalBahasa(
     drawBoard(answerOfPlayer);
 }
 
-//logic wordle
-void playGameEnglish(const vector<string> &secretWords) {
+void playGame(const vector<string> &secretWords, LanguageSystem &languageSystem) {
     string answerOfPlayer[ROW][COLUMN];
     
     for(int i = 0; i < ROW; i++) { //setup wordle board
@@ -111,12 +111,12 @@ void playGameEnglish(const vector<string> &secretWords) {
         drawTerminalEnglish(answerOfPlayer);
         string guessWord;
          do { //ensuring guesses comply with the rules
-                cout << "Please give your answer\t: ";
+                cout << languageSystem.sentence["please_give_your_answer"] << "\t: ";
                 cin >> guessWord;
                 guessWord = toUpperString(guessWord);
                 bool isInputValid = isUserInputValid(guessWord, secretWords);
                 if(!isInputValid) 
-                    cout << "Ensure that the word has five letters, the input only contains letters, and the word is valid." << endl;
+                    cout << languageSystem.sentence["explain_valid_input_characteristic"] << endl;
                 else 
                     break;
             } while(true);
@@ -161,21 +161,21 @@ void playGameEnglish(const vector<string> &secretWords) {
             //it means guess player same with target word
             drawTerminalEnglish(answerOfPlayer);
             scorePlayer++;
-            cout << "\nCongratulations, your guess is correct!" << endl;
-            cout << "You have successfully guessed " << scorePlayer << " times." << endl << endl;
+            cout << "\n" << languageSystem.sentence["congratulation"] << endl;
+            cout << languageSystem.sentence["you_have_successfully_guessed"] << scorePlayer << " " << languageSystem.sentence["times"] << endl << endl;
             return;
         } else if (guess > 0) {
             drawTerminalEnglish(answerOfPlayer);
-            cout << "Still incorrect, try again!" << endl;
+            cout << languageSystem.sentence["still_incorrect"] << endl;
         }
         cout << endl;
     }
     
     wrongGuess++;
-    cout << "Well, you failed to guess correctly :(" << endl;
-    cout << "The correct answer is " << targetWord << endl;
-    cout << "You have successfully guessed " << scorePlayer << " times." << endl;
-    cout << "You have failed guessed " << wrongGuess << " times." << endl << endl;
+    cout << languageSystem.sentence["you_failed_1"] << endl;
+    cout << languageSystem.sentence["you_failed_2"] << " " << targetWord << endl;
+    cout << languageSystem.sentence["you_have_successfully_guessed"] << scorePlayer << " " << languageSystem.sentence["times"] << endl;
+    cout << languageSystem.sentence["you_have_failed_guessed"] << " " << wrongGuess << " " << languageSystem.sentence["times"] << endl << endl;
 }
 
 
@@ -198,12 +198,12 @@ void playGameBahasa(const vector<string> &secretWords) {
         drawTerminalBahasa(answerOfPlayer);
         string guessWord;
          do { //ensuring guesses comply with the rules
-                cout << "Masukkan jawaban anda\t: ";
+                cout << "\t: ";
                 cin >> guessWord;
                 guessWord = toUpperString(guessWord);
                 bool isInputValid = isUserInputValid(guessWord, secretWords);
                 if(!isInputValid) 
-                    cout << "Pastikan jawaban anda hanya 5 karakter, hanya berupa huruf, dan kata valid." << endl;
+                    cout << "" << endl;
                 else 
                     break;
             } while(true);
@@ -248,20 +248,19 @@ void playGameBahasa(const vector<string> &secretWords) {
             //it means guess player same with target word
             drawTerminalBahasa(answerOfPlayer);
             scorePlayer++;
-            cout << "\nSelamat, tebakan anda benar!" << endl;
-            cout << "Kamu telah berhasil menebak sebanyak " << scorePlayer << " kali." << endl << endl;
-            cout << "Kamu telah gagal menebak sebanyak " << wrongGuess << " kali." << endl << endl;
+            cout << "\n" << endl;
+            cout << " " << scorePlayer << " kali." << endl << endl;
             return;
         } else if (guess > 0) {
             drawTerminalBahasa(answerOfPlayer);
-            cout << "Jawaban anda masih salah, coba lagi!" << endl;
+            cout << "" << endl;
         }
         cout << endl;
     }
 
     wrongGuess++;
-    cout << "Yahh, anda gagal untuk menebak dengan benar :(" << endl;
-    cout << "Jawaban yang benar adalah " << targetWord << endl;
+    cout << "" << endl;
+    cout << " " << targetWord << endl;
     cout << "Kamu telah berhasil menebak sebanyak " << scorePlayer << " kali." << endl;
     cout << "Kamu telah gagal menebak sebanyak " << wrongGuess << " kali." << endl << endl;
 }

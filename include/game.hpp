@@ -3,12 +3,15 @@
 
 #include <vector>
 #include <string>
+#include "../include/language.hpp"
+
 
 void drawGameHeaderEnglish();
 void drawGameHeaderBahasa();
 
 void drawBoard(std::string answerOfPlayer[6][5]);
 
+void playGame(const std::vector<std::string> &secretWords, LanguageSystem &languageSystem);
 void playGameEnglish(const std::vector<std::string> &secretWords);
 void playGameBahasa(const std::vector<std::string> &secretWords);
 
