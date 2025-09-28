@@ -16,24 +16,14 @@ void clearTerminal() {
     system("cls");
 }
 
-void drawGameHeaderEnglish() {
-    cout << setfill('=') << setw(31) << '=' << endl;
-    cout << "   << WORDLE (C++ Edition) >>   " << endl; 
-    cout << setfill('=') << setw(31) << '=' << endl;
-    cout << "   Guess the 5-letter word!   " << endl << endl;
-    cout << printGreen("Green") << " : The letter is in the word and in the correct position" << endl;
-    cout << printYellow("Yellow") << ": The letter is in the word but in the wrong position" << endl;
-    cout << printGray("Gray") << "  : The letter is not in the word at all" << endl << endl;
-}
-
-void drawGameHeaderBahasa() {
+void drawGameHeader(LanguageSystem &languageSystem) {
     cout << setfill('=') << setw(43) << '=' << endl;
-    cout << "   \t << WORDLE (C++ Edisi) >>   " << endl; 
+    cout << "   \t << WORDLE (C++ Edition) >>   " << endl; 
     cout << setfill('=') << setw(43) << '=' << endl;
-    cout << "   Tebak kata dengan panjang 5 karakter!   " << endl << endl;
-    cout << printGreen("Green") << " : Huruf tersebut terdapat dalam kata dan berada pada posisi yang benar." << endl;
-    cout << printYellow("Yellow") << ": Huruf tersebut ada dalam kata, tetapi berada di posisi yang salah." << endl;
-    cout << printGray("Gray") << "  : Huruf sama sekali tidak ada dalam kata tersebut." << endl << endl;
+    cout << "   " << languageSystem.stringResource("game_header_1") << "   " << endl << endl;
+    cout << printGreen("Green") << " : " << languageSystem.stringResource("game_header_green_explanation") << endl;
+    cout << printYellow("Yellow") << ": " << languageSystem.stringResource("game_header_yellow_explanation") << endl;
+    cout << printGray("Gray") << "  : " << languageSystem.stringResource("game_header_gray_explanation") <<  endl;
 }
 
 //visualization of wordle board
@@ -78,19 +68,12 @@ void drawBoard(string answerOfPlayer[6][5]) {
 }
 
 // Redraw a terminal: clear screen, draw game header, and draw wordle board
-void drawTerminalEnglish(
-    string answerOfPlayer[6][5]
+void drawTerminal(
+    string answerOfPlayer[6][5],
+    LanguageSystem &LanguageSystem
 ) {
     clearTerminal();
-    drawGameHeaderEnglish();
-    drawBoard(answerOfPlayer);
-}
-
-void drawTerminalBahasa(
-    string answerOfPlayer[6][5]
-) {
-    clearTerminal();
-    drawGameHeaderBahasa();
+    drawGameHeader(LanguageSystem);
     drawBoard(answerOfPlayer);
 }
 
@@ -108,15 +91,15 @@ void playGame(const vector<string> &secretWords, LanguageSystem &languageSystem)
     int correctChar = 0; //variable that count right char and right position for every guess
 
     while (guess--) {
-        drawTerminalEnglish(answerOfPlayer);
+        drawTerminal(answerOfPlayer, languageSystem);
         string guessWord;
          do { //ensuring guesses comply with the rules
-                cout << languageSystem.sentence["please_give_your_answer"] << "\t: ";
+                cout << languageSystem.stringResource("please_give_your_answer") << "\t: ";
                 cin >> guessWord;
                 guessWord = toUpperString(guessWord);
                 bool isInputValid = isUserInputValid(guessWord, secretWords);
                 if(!isInputValid) 
-                    cout << languageSystem.sentence["explain_valid_input_characteristic"] << endl;
+                    cout << languageSystem.stringResource("explain_valid_input_characteristic") << endl;
                 else 
                     break;
             } while(true);
@@ -159,108 +142,24 @@ void playGame(const vector<string> &secretWords, LanguageSystem &languageSystem)
         if (correctChar == 5) { 
             //there is 5 char correct char and position, 
             //it means guess player same with target word
-            drawTerminalEnglish(answerOfPlayer);
+            drawTerminal(answerOfPlayer, languageSystem);
             scorePlayer++;
-            cout << "\n" << languageSystem.sentence["congratulation"] << endl;
-            cout << languageSystem.sentence["you_have_successfully_guessed"] << scorePlayer << " " << languageSystem.sentence["times"] << endl << endl;
+            cout << "\n" << languageSystem.stringResource("congratulation") << endl;
+            cout << languageSystem.stringResource("you_have_successfully_guessed") << scorePlayer << " " << languageSystem.stringResource("times") << endl << endl;
             return;
         } else if (guess > 0) {
-            drawTerminalEnglish(answerOfPlayer);
-            cout << languageSystem.sentence["still_incorrect"] << endl;
+            drawTerminal(answerOfPlayer, languageSystem);
+            cout << languageSystem.stringResource("still_incorrect") << endl;
         }
         cout << endl;
     }
     
     wrongGuess++;
-    cout << languageSystem.sentence["you_failed_1"] << endl;
-    cout << languageSystem.sentence["you_failed_2"] << " " << targetWord << endl;
-    cout << languageSystem.sentence["you_have_successfully_guessed"] << scorePlayer << " " << languageSystem.sentence["times"] << endl;
-    cout << languageSystem.sentence["you_have_failed_guessed"] << " " << wrongGuess << " " << languageSystem.sentence["times"] << endl << endl;
+    cout << languageSystem.stringResource("you_failed_1") << endl;
+    cout << languageSystem.stringResource("you_failed_2") << " " << targetWord << endl;
+    cout << languageSystem.stringResource("you_have_successfully_guessed") << scorePlayer << " " << languageSystem.stringResource("times") << endl;
+    cout << languageSystem.stringResource("you_have_failed_guessed") << " " << wrongGuess << " " << languageSystem.stringResource("times") << endl << endl;
 }
 
 
 
-//logic wordle
-void playGameBahasa(const vector<string> &secretWords) {
-    string answerOfPlayer[ROW][COLUMN];
-    
-    for(int i = 0; i < ROW; i++) { //setup wordle board
-        for(int j = 0; j < COLUMN; j++) {
-            answerOfPlayer[i][j] = " ";
-        }
-    }
-
-    string targetWord = secretWords[rand() % secretWords.size()]; //give random word to guess
-    int guess = 6;
-    int correctChar = 0; //variable that count right char and right position for every guess
-
-    while (guess--) {
-        drawTerminalBahasa(answerOfPlayer);
-        string guessWord;
-         do { //ensuring guesses comply with the rules
-                cout << "\t: ";
-                cin >> guessWord;
-                guessWord = toUpperString(guessWord);
-                bool isInputValid = isUserInputValid(guessWord, secretWords);
-                if(!isInputValid) 
-                    cout << "" << endl;
-                else 
-                    break;
-            } while(true);
-        guessWord = toUpperString(guessWord); //convert to uppercase if player give lowercase input
-        correctChar = 0;
-        
-        //count every character player guess
-        //example: JOGJA -> J(2), O(1), G(1), A(1)
-        int charInTargetWord[26] = {};
-        int charInGuessWord[26] = {};
-        for (int i = 0; i < targetWord.length(); i++) {
-            int indexCharacter = targetWord[i] - 'A';
-            charInTargetWord[indexCharacter]++;
-        }
-        for (int i = 0; i < guessWord.length(); i++) {
-            int indexCharacter = guessWord[i] - 'A';
-            charInGuessWord[indexCharacter]++;
-        }
-
-        //check player guess
-        for (int i = 0; i < guessWord.length(); i++) {
-            int indexCharacter = guessWord[i] - 'A';
-            if (guessWord[i] == targetWord[i]) { //correct char and position
-                answerOfPlayer[(ROW - 1) - guess][i] = printGreen(guessWord[i]);
-                correctChar++;
-                charInTargetWord[indexCharacter]--;
-                charInGuessWord[indexCharacter]--;
-            } else if (
-                charInTargetWord[indexCharacter] > 0 
-                && charInTargetWord[indexCharacter] >= charInGuessWord[indexCharacter]
-                ) { //correct char and wrong position
-                answerOfPlayer[(ROW - 1) - guess][i] = printYellow(guessWord[i]);
-                charInTargetWord[indexCharacter]--;
-                charInGuessWord[indexCharacter]--;
-            } else { //wrong char and position
-                answerOfPlayer[(ROW - 1) - guess][i] = printGray(guessWord[i]);
-            }
-        }
-
-        if (correctChar == 5) { 
-            //there is 5 char correct char and position, 
-            //it means guess player same with target word
-            drawTerminalBahasa(answerOfPlayer);
-            scorePlayer++;
-            cout << "\n" << endl;
-            cout << " " << scorePlayer << " kali." << endl << endl;
-            return;
-        } else if (guess > 0) {
-            drawTerminalBahasa(answerOfPlayer);
-            cout << "" << endl;
-        }
-        cout << endl;
-    }
-
-    wrongGuess++;
-    cout << "" << endl;
-    cout << " " << targetWord << endl;
-    cout << "Kamu telah berhasil menebak sebanyak " << scorePlayer << " kali." << endl;
-    cout << "Kamu telah gagal menebak sebanyak " << wrongGuess << " kali." << endl << endl;
-}

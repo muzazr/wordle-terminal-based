@@ -69,6 +69,7 @@
         "list": "cpp",
         "map": "cpp",
         "xhash": "cpp",
-        "xtree": "cpp"
+        "xtree": "cpp",
+        "sstream": "cpp"
     }
 }

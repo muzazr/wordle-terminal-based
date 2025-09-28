@@ -3,9 +3,9 @@
 #include <string>
 #include <ctime>
 #include <iomanip>
+#include "../include/language.hpp"
 #include "../include/game.hpp"
 #include "../include/utils.hpp"
-#include "../include/language.hpp"
 
 using namespace std;
 LanguageSystem languageSystem;
@@ -16,7 +16,6 @@ int main() {
     cout << "   << WORDLE (C++ Edition) >>   " << endl; 
     cout << setfill('=') << setw(31) << '=' << endl;
     cout << "   Guess the 5-letter word!   " << endl << endl;
-
     
 
     while(true) {
@@ -34,7 +33,7 @@ int main() {
         bool play = true;
         while(play) {
             playGame(secretWords, languageSystem);
-            cout << languageSystem.sentence["play_again"] << " (y/n) : ";
+            cout << languageSystem.stringResource("play_again") << " (y/n) : ";
             char playAgain;
             cin >> playAgain;
             play = (playAgain == 'y');

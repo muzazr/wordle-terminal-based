@@ -6,11 +6,14 @@
 #include <unordered_map>
 
 class LanguageSystem {
-    public:
+    private:
         std::string lang;
-        unordered_map<std::string, std::string> sentence;
-        unordered_map<std::string, std::string> enSentence;
-        unordered_map<std::string, std::string> idSentence;
+        std::unordered_map<std::string, std::string> sentence;
+        std::unordered_map<std::string, std::string> enSentence;
+        std::unordered_map<std::string, std::string> idSentence;
+    public:
+        LanguageSystem();
         void setLang(std::string code);
+        std::string stringResource(std::string keyword);
 };
 #endif

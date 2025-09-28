@@ -22,9 +22,7 @@ bool isUserInputValid(string &input, const vector<string> &wordList) {
     }
 
     auto findWord = std::find(wordList.begin(), wordList.end(), input);
-    cout << wordList[0] << endl;
     if(findWord == wordList.end()) {
-        cout << "Kata tidak valid" << endl;
         return false;
     }
 
