@@ -13,6 +13,7 @@ class LanguageSystem {
         std::unordered_map<std::string, std::string> idSentence;
     public:
         LanguageSystem();
+        std::string getLang();
         void setLang(std::string code);
         std::string stringResource(std::string keyword);
 };

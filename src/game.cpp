@@ -20,7 +20,7 @@ void drawGameHeader(LanguageSystem &languageSystem) {
     cout << setfill('=') << setw(43) << '=' << endl;
     cout << "   \t << WORDLE (C++ Edition) >>   " << endl; 
     cout << setfill('=') << setw(43) << '=' << endl;
-    cout << "   " << languageSystem.stringResource("game_header_1") << "   " << endl << endl;
+    cout << "   " << ((languageSystem.getLang() == "en") ? "\t" : "") << languageSystem.stringResource("game_header_1") << "   " << endl << endl;
     cout << printGreen("Green") << " : " << languageSystem.stringResource("game_header_green_explanation") << endl;
     cout << printYellow("Yellow") << ": " << languageSystem.stringResource("game_header_yellow_explanation") << endl;
     cout << printGray("Gray") << "  : " << languageSystem.stringResource("game_header_gray_explanation") <<  endl;

@@ -48,6 +48,10 @@ LanguageSystem::LanguageSystem() {
 
 };
 
+string LanguageSystem::getLang() {
+    return this->lang;
+}
+
 void LanguageSystem::setLang(string code) {
     this->lang = code;
     if(lang == "en") {
